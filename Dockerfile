@@ -25,8 +25,8 @@ COPY --from=build /app/package.json /app/package.json
 
 WORKDIR /app
 
-ENV PORT=3000
+ENV PORT=8080
 ENV NODE_ENV='prod'
-EXPOSE 3000
+EXPOSE 8080
 
 CMD ["dist/index.js"]
