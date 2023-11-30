@@ -1,4 +1,5 @@
 storage/
+dist/
 .env
 db.json
 node_modules/

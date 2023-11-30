@@ -4,12 +4,13 @@
   "description": "",
   "exports": "./dist/index.js",
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   },
   "type": "module",
   "scripts": {
     "ts:dev": "tsx watch src/index.ts",
-    "ts:build": "tsc"
+    "ts:build": "tsc",
+    "server": "node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
