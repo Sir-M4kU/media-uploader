@@ -5,10 +5,12 @@ import { existsSync } from "node:fs"
 import { customAlphabet } from "nanoid"
 
 const { PORT = 3000, NODE_ENV } = process.env
+const useDist = NODE_ENV === "prod" ? "dist" : "src"
+
 const STORAGE_PATH = join(process.cwd(), "storage")
 const DB_PATH = join(process.cwd(), "db.json")
-const HTML_PATH = join(process.cwd(), "src", "views", "index.html")
-const PUBLIC_PATH = join(process.cwd(), "src", "public")
+const HTML_PATH = join(process.cwd(), useDist, "views", "index.html")
+const PUBLIC_PATH = join(process.cwd(), useDist, "public")
 const nanoid = customAlphabet(
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
   10

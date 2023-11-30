@@ -1,0 +1,5 @@
+.env
+db.json
+storage/
+dist/
+node_modules/

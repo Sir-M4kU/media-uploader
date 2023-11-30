@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  dotenv:
+    specifier: 16.3.1
+    version: 16.3.1
   express:
     specifier: 4.18.2
     version: 4.18.2
@@ -17,9 +20,6 @@ dependencies:
   nanoid:
     specifier: 5.0.3
     version: 5.0.3
-  typescript:
-    specifier: 5.3.2
-    version: 5.3.2
 
 devDependencies:
   '@biomejs/biome':
@@ -31,12 +31,12 @@ devDependencies:
   '@types/express-fileupload':
     specifier: 1.4.4
     version: 1.4.4
-  dotenv:
-    specifier: 16.3.1
-    version: 16.3.1
   tsx:
     specifier: 4.6.0
     version: 4.6.0
+  typescript:
+    specifier: 5.3.2
+    version: 5.3.2
 
 packages:
 
@@ -497,7 +497,7 @@ packages:
   /dotenv@16.3.1:
     resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
     engines: {node: '>=12'}
-    dev: true
+    dev: false
 
   /ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -919,7 +919,7 @@ packages:
     resolution: {integrity: sha512-6l+RyNy7oAHDfxC4FzSJcz9vnjTKxrLpDG5M2Vu4SHRVNg6xzqZp6LYSR9zjqQTu8DU/f5xwxUdADOkbrIX2gQ==}
     engines: {node: '>=14.17'}
     hasBin: true
-    dev: false
+    dev: true
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
