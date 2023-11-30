@@ -1,12 +1,13 @@
 import { existsSync } from "node:fs"
-import { rm } from "node:fs/promises"
+import { rm, chmod, constants } from "node:fs/promises"
 import { join } from "node:path"
 import { JSONPreset } from "lowdb/node"
 import type { UploadedFile } from "express-fileupload"
-import { DB_PATH, STORAGE_PATH } from "../config.js"
+import { DB_PATH, STORAGE_PATH, FILE_EXPIRATION } from "../config.js"
 import type { File, FileJSON, IDB } from "../types.js"
 import { nanoid } from "../config.js"
 
+const PERMISSIONS = constants.S_IRUSR | constants.S_IWUSR
 const DEFAULT_DATA: IDB = {
   files: [],
   users: []
@@ -34,6 +35,11 @@ class FileDB {
     db.data.files.push(newFile)
     await db.write()
     await mv(filePath)
+    // Schedule a delete after x time
+    setTimeout(async () => {
+      await this.delete(newFile.id)
+    }, FILE_EXPIRATION)
+    await chmod(filePath, PERMISSIONS)
     return {
       ok: true,
       data: {

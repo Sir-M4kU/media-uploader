@@ -1,6 +1,6 @@
 import { server } from "./app.js"
-import type { AddressInfo } from "node:net"
+import { PORT } from "./config.js"
 
-const { port } = server.address() as AddressInfo
+const serverInfo = server.address()
 
-console.log(`Server listening on http://localhost:${port}`)
+console.log(`Server listening on http://localhost:${PORT}`)
