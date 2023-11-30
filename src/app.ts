@@ -9,7 +9,12 @@ export const server = app.listen(PORT)
 
 app.use(express.json())
 app.use(express.static(PUBLIC_PATH))
-app.use(fileUpload())
+app.use(
+  fileUpload({
+    limits: { fileSize: 52428800 },
+    abortOnLimit: true
+  })
+)
 
 app.get("/", (req, res) => {
   res.sendFile(HTML_PATH)
