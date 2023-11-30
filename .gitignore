@@ -1,0 +1,4 @@
+storage/
+.env
+db.json
+node_modules/

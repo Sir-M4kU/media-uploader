@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"module": "NodeNext",
+		"target": "ES2021",
+		"sourceMap": true,
+		"strictNullChecks": true,
+		"rootDir": "src",
+		"outDir": "dist",
+		"esModuleInterop": true,
+		"resolveJsonModule": true
+	},
+	"exclude": ["node_modules"]
+}

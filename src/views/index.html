@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <link rel="stylesheet" href="/css/index.min.css" />
+  <style>
+    body {
+      max-width: 140ch;
+    }
+
+    #upload-form {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    form div {
+      width: 500px;
+    }
+
+    #upload-info {
+      width: 100%;
+      height: 100%;
+    }
+
+    #delete-form {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Media Uploader</h1>
+    <a href="/files">See all files</a>
+    <section>
+      <form id="upload-form">
+        <div>
+          <label for="media">Upload your file</label>
+          <input id="media" type="file" name="media" required />
+          <button>Upload</button>
+        </div>
+        <div>
+          <pre id="upload-info">Here will be displayed the data of the uploaded file</pre>
+        </div>
+      </form>
+      <form id="delete-form">
+        <div>
+          <label for="delete-file">Delete your file</label>
+          <input id="delete-file" type="text" name="delete-file" placeholder="Enter the file id..." required />
+          <button>Delete</button>
+        </div>
+        <div>
+          <p id="delete-info"></p>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script type="module">
+    const $formDelete = document.getElementById('delete-form')
+    const $fileInput = document.getElementById('media')
+    const $formUpload = document.getElementById('upload-form')
+    const $pInfo = document.getElementById('delete-info')
+    const $preInfo = document.getElementById('upload-info')
+
+    async function handleDelete(event) {
+      event.preventDefault()
+      const formData = new FormData(event.target)
+      const fileId = String(formData.get('delete-file'))
+      const req = await fetch(`/file/${fileId}`, {
+        method: 'DELETE'
+      })
+      if (req.ok && req.status === 204) {
+        $pInfo.textContent = 'File deleted'
+        return
+      }
+      $pInfo.textContent = 'File not found'
+    }
+    async function handleUpload(event) {
+      event.preventDefault()
+      const file = event.target[0].files[0]
+      const formData = new FormData()
+      formData.append('media', file)
+      const req = await fetch('/upload', {
+        method: 'POST',
+        body: formData
+      })
+      console.log(req.ok)
+      if (req.ok && req.status === 201) {
+        const resJSON = await req.json()
+        $preInfo.textContent = JSON.stringify(resJSON, null, ' ')
+        return
+      } else if (req.status === 302) {
+        $preInfo.textContent = 'File already exists'
+        return
+      }
+      $preInfo.textContent = 'Failed uploading the file'
+    }
+
+    $formDelete.addEventListener('submit', handleDelete)
+    $formUpload.addEventListener('submit', handleUpload)
+  </script>
+</body>
+
+</html>
